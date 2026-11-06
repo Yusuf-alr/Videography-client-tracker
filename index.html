@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video Tracker</title>
+</head>
+<body>
+  <h1>Track your video</h1>
+
+  <input id="codeInput" type="text" placeholder="Enter your code, e.g. VID-7K2Q9X">
+  <button id="trackButton">Track</button>
+
+  <div id="result"></div>
+
+  <script>
+    const input = document.getElementById("codeInput");
+    const button = document.getElementById("trackButton");
+    const resultBox = document.getElementById("result");
+
+    const API_URL = "https://script.google.com/macros/s/AKfycbywNrxXLThUA8bKL6MC_iERXYBH_TIGyEdoQjj8WMmWNzGk0OMwzMqqrHD4FiHNO5_3Yw/exec";
+
+    button.addEventListener("click", async function () {
+    const code = input.value.toUpperCase().trim();
+    resultBox.textContent = "Loading...";
+
+    const response = await fetch(API_URL + "?code=" + code);
+    const data = await response.json();
+    if(!data.found){
+        resultBox.textContent = "Code not found. Please check and try again.";
+    }else{
+        let result="";
+        result = data.name+" - "+data.project+" - "+data.shoot_status;
+        resultBox.textContent = result;
+
+
+    }
+
+});
+  </script>
+</body>
+</html>
