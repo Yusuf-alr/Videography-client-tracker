@@ -62,6 +62,27 @@ Unknown code:
 - **Debugging approach** — adding a temporary marker field to confirm which version of the code was running, instead of guessing
 - **Reading browser console errors** — e.g. working out that a CORS error was really a side effect of a 404 from a wrong URL
 
+## How I used AI
+
+I built this project with an AI coding assistant (Claude), using it deliberately: AI for the parts that don't teach me much, and writing the core logic myself so I understand every line.
+
+**What AI did**
+
+- Generated the fake client data (`sample-clients.csv`)
+- Wrote the starter HTML layout (the input box, button and result area)
+- Drafted this README, which I then edited
+- Explained concepts as I went (APIs, JSON, `async`/`await`, CORS) and reviewed my code, pointing out bugs without rewriting it for me
+- Suggested the `formatDate` helper and the `Object.prototype.toString` date check once I'd tracked down the time-zone bug
+
+**What I wrote myself**
+
+- The API logic in `doGet`: the loop that searches rows, the code comparison, and the found / not-found JSON responses
+- The front-end JavaScript: reading and cleaning the input (`trim`, `toUpperCase`), calling the API with `fetch`, and handling the not-found case
+- The debugging: testing codes, reading console errors, and adding a marker field to find out which code was running
+- Git setup, commits and pushing to GitHub
+
+**The rule I followed:** I only kept AI-written code I could explain line by line. When AI found a bug, I asked it to explain the cause instead of just fixing it.
+
 ## Running it yourself
 
 1. Create a Google Sheet and import `sample-clients.csv` (**File → Import → Upload → Replace current sheet**).
