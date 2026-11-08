@@ -27,13 +27,31 @@
     const data = await response.json();
     if(!data.found){
         resultBox.textContent = "Code not found. Please check and try again.";
-    }else{
-        let result="";
-        result = data.name+" - "+data.project+" - "+data.shoot_status;
-        resultBox.textContent = result;
+    } else {
+  resultBox.textContent = "";
+
+  const title = document.createElement("h2");
+  title.textContent = data.name + " — " + data.project;
+  resultBox.appendChild(title);
+
+  const shootBox = document.createElement("div");
+    shootBox.textContent = "Shoot: " + data.shoot_status;
+    if(data.shoot_date){shootBox.textContent +=" ("+data.shoot_date+")";}
+  resultBox.appendChild(shootBox);
 
 
-    }
+  const deliveryBox = document.createElement("div");
+  if(data.delivery_date){deliveryBox.textContent = "Delivery Date: " + data.delivery_date;}
+  else{deliveryBox.textContent = "Delivery: not scheduled yet.";}
+  resultBox.appendChild(deliveryBox);
+
+if(data.delivery_note){
+  const deliveryNote = document.createElement("div");
+  deliveryNote.textContent = "Delivery note: " + data.delivery_note;
+  resultBox.appendChild(deliveryNote);
+}
+  }
+
 
 });
   </script>
